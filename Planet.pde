@@ -6,13 +6,26 @@ class Planet {
   float orbitSpeed;
   PVector v;
   
+  float x;
+  float y;
+  float z;
+  
+  PShape globe;
+  
   Planet(float r, float d, float s) {
     v = PVector.random3D();
+    x = v.x;
+    y = v.y;
+    z = v.z;
     radius = r;
     dist = d;
     v.mult(dist);
     angle = random(TWO_PI);
     orbitSpeed = s;
+    
+    noStroke();
+    fill(255);
+    globe = createShape(SPHERE, radius);
   }
   
   void orbit() {
@@ -39,6 +52,37 @@ class Planet {
     }
   }
   
+  void spawnMoon() {
+    float r = (radius*0.5);
+    float d = random(radius+r+15, (radius+r)*2);
+    float s = random(-0.035, 0.035);
+    if(planets == null) {
+      planets = new Planet[1];
+      planets[0] = new Planet(r, d, s);
+    } else if(planets.length < 5) {
+      Planet[] temp = planets;
+      planets = new Planet[temp.length + 1];
+      for(int i = 0; i < temp.length; i++) {
+        planets[i] = temp[i];
+      }
+      planets[planets.length - 1] = new Planet(r, d, s);
+    }
+  }
+  
+  void removeMoon() {
+    if(planets != null) {
+      if(planets.length == 1) {
+        planets = null;
+      } else {
+        Planet[] temp = planets;
+        planets = new Planet[temp.length - 1];
+        for(int i = 0; i < planets.length; i++) {
+          planets[i] = temp[i];
+        }
+      }
+    }
+  }
+  
   void show() {
     pushMatrix();
     noStroke();
@@ -49,9 +93,8 @@ class Planet {
     
     rotate(angle, perp.x, perp.y, perp.z);
     translate(v.x, v.y, v.z);
-
-    sphere(radius);
-    //ellipse(0, 0, radius*2, radius*2);
+    
+    shape(globe);
     
     if (planets != null) {
       for(int i = 0; i < planets.length; i++) {
