@@ -12,6 +12,8 @@ class Planet {
   
   PShape globe;
   
+  Boolean highlight;
+  
   Planet(float r, float d, float s) {
     v = PVector.random3D();
     x = v.x;
@@ -25,7 +27,10 @@ class Planet {
     
     noStroke();
     fill(255);
-    globe = createShape(SPHERE, radius);
+    globe = createShape(GROUP);
+    PShape planet = createShape(SPHERE, radius);
+    globe.addChild(planet);
+    highlight = false;
   }
   
   void orbit() {
@@ -94,6 +99,13 @@ class Planet {
     rotate(angle, perp.x, perp.y, perp.z);
     translate(v.x, v.y, v.z);
     
+    if(highlight) {
+      globe.getChild(0).setFill(#D6E50E);
+      highlight = false;
+    } else {
+      globe.getChild(0).setFill(color(255));
+    }
+    
     shape(globe);
     
     if (planets != null) {
@@ -104,5 +116,6 @@ class Planet {
     
     popMatrix();
   }
+  
 
 }
