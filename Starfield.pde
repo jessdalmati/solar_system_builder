@@ -23,18 +23,18 @@ class Starfield {
     
     Star() {
 
-      x = random(-width, width);
-      y = random(-height, height);
-      z = random(2*width);
+      x = random(-width/2, width/2);
+      y = random(-height/2, height/2);
+      z = random(width/2);
       speed = random(3);
     }
     
     void update() {
       z = z - speed;
       if(z < 1) {
-        z = 2*width;
-        x = random(-width, width);
-        y = random(-height, height);
+        z = width/2;
+        x = random(-width/2, width/2);
+        y = random(-height/2, height/2);
       }
     }
     
@@ -42,10 +42,11 @@ class Starfield {
       fill(255);
       noStroke();
       
-      float sx = map(x/z, 0, 1, 0, width);
-      float sy = map(y/z, 0, 1, 0, height);
+      float sx = map(x/z, 0, 1, 0, width/2);
+      float sy = map(y/z, 0, 1, 0, height/2);
+      float d = map(z, 0, width/2, 4, 0);
       
-      ellipse(sx, sy, random(1, 3), random(1, 3));
+      ellipse(sx, sy, d, d);
     }
   }
 }
