@@ -6,9 +6,7 @@ class PlanetMenu extends Menu {
   
   void drawMenu(Planet sun) {
     if(show) {
-      noStroke();
-      fill(200, 75);
-      rect(-width/2, -height/2, 120, height);
+      drawBackground();
       if(sun.planets != null) {
         numButtons(sun.planets.length);
         for(int i = 0; i < buttons.length; i++) {

@@ -29,11 +29,15 @@ class Menu {
     }
   }
   
+  void drawBackground() {
+    noStroke();
+    fill(255, 50);
+    rect(-width/2, -height/2, 120, height);
+  }
+  
   void drawMenu() {
     if(show) {
-      noStroke();
-      fill(200, 75);
-      rect(-width/2, -height/2, 120, height);
+      drawBackground();
       for(int i = 0; i < buttons.length; i++) {
          buttons[i].drawButton();
       }

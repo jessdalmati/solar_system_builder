@@ -2,7 +2,10 @@ class CBodyMenu extends Menu {
   int planet;
   
   CBodyMenu() {
+  }
   
+  CBodyMenu(String[] buttonNames) {
+    super(buttonNames);
   }
   
   void drawMenu(Planet sun) {
@@ -10,9 +13,7 @@ class CBodyMenu extends Menu {
       if(sun.planets != null) {
         sun.planets[planet].highlight = true;
       }
-      noStroke();
-      fill(200, 75);
-      rect(-width/2, -height/2, 120, height);
+      drawBackground();
       for(int i = 0; i < buttons.length; i++) {
          buttons[i].drawButton();
       }

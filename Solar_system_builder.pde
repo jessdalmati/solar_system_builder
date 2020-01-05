@@ -1,9 +1,11 @@
 Planet sun;
-//PeasyCam cam;
 
 Menu mainMenu;
 PlanetMenu planetMenu;
 CBodyMenu cBodyMenu;
+
+Starfield sf = new Starfield();
+
 
 
 void settings() {
@@ -11,17 +13,25 @@ void settings() {
 }
 
 void setup() {
+
   sun = new Planet(50, 0, 0);
-  String[] buttonNames = {"+", "-", "planets"};
-  mainMenu = new Menu(buttonNames);
+  String[] names1 = {"+", "-", "planets", "sun", "ring"};
+  mainMenu = new Menu(names1);
   planetMenu = new PlanetMenu();
-  cBodyMenu = new CBodyMenu();
+  String[] names2 = {"moon", "-moon", "ring", "texture", "+size", "-size", 
+    "+dist", "-dist", "+speed", "-speed"};
+  cBodyMenu = new CBodyMenu(names2);
 }
 
 void draw() {
   background(0);
   lights();
   translate(width/2, height/2);
+  
+  //hint(DISABLE_DEPTH_MASK);
+  sf.drawStars();
+  //hint(ENABLE_DEPTH_MASK);
+  
   sun.show();
   sun.orbit();
   
