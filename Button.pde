@@ -3,24 +3,27 @@ class Button {
   int y;
   int w;
   int h;
-  
-  Button(int x, int y, int w, int h) {
+  String text;
+
+  Button(String text, int x, int y, int w, int h) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
+    this.text = text;
   }
   
-  void drawButton(String text, int textX, int textY, int textSize) {
+  void drawButton() {
     noStroke();
     fill(0);
     rect(x, y, w, h, 10);
     fill(255);
-    textSize(textSize);
-    text(text, textX, textY);
+    textSize(18);
+    textAlign(CENTER, CENTER);
+    text(text, x + w/2, y + h/2);
   }
   
-  Boolean mouseOverButton() {
+  Boolean mouseOver() {
     int x = this.x + width/2;
     int y = this.y + height/2;
     
@@ -31,7 +34,7 @@ class Button {
       return false;
   }
   
-  void drawHighlight() {
+  void highlight() {
     stroke(#D6E50E);
     strokeWeight(3); 
     noFill();
