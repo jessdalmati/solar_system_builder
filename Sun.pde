@@ -12,6 +12,39 @@ class Sun extends Planet {
   }
   
   @Override
+  void spawnMoon() {
+    float r = (radius*random(0.25, 0.65));
+    float d = random(radius+r+15, (radius+r)*2);
+    float s = random(-0.035, 0.035);
+    if(planets == null) {
+      planets = new Planet[1];
+      planets[0] = new Planet(r, d, s);
+    } else if(planets.length < 10) {
+      Planet[] temp = planets;
+      planets = new Planet[temp.length + 1];
+      for(int i = 0; i < temp.length; i++) {
+        planets[i] = temp[i];
+      }
+      planets[planets.length - 1] = new Planet(r, d, s);
+    }
+  }
+  
+  @Override
+  void removeMoon() {
+    if(planets != null) {
+      if(planets.length == 1) {
+        planets = null;
+      } else {
+        Planet[] temp = planets;
+        planets = new Planet[temp.length - 1];
+        for(int i = 0; i < planets.length; i++) {
+          planets[i] = temp[i];
+        }
+      }
+    }
+  }
+  
+  @Override
   void show() {
     pushMatrix();
     noStroke();

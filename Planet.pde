@@ -81,13 +81,13 @@ class Planet {
   }
   
   void spawnMoon() {
-    float r = (radius*0.5);
-    float d = random(radius+r+15, (radius+r)*2);
+    float r = (radius*random(0.1, 0.3));
+    float d = random(radius+r+5, radius+r*4);
     float s = random(-0.035, 0.035);
     if(planets == null) {
       planets = new Planet[1];
       planets[0] = new Planet(r, d, s);
-    } else if(planets.length < 10) {
+    } else if(planets.length < 5) {
       Planet[] temp = planets;
       planets = new Planet[temp.length + 1];
       for(int i = 0; i < temp.length; i++) {
