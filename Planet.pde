@@ -13,6 +13,10 @@ class Planet {
   PShape globe;
   
   Boolean highlight;
+  Boolean ring;
+  color fill;
+  color[] colours = {color(#9CEDB3), color(#ED9CE9), color(#EAED9C), color(255)};
+  int curColour = 0;
   
   Planet(float r, float d, float s) {
     v = PVector.random3D();
@@ -31,6 +35,29 @@ class Planet {
     PShape planet = createShape(SPHERE, radius);
     globe.addChild(planet);
     highlight = false;
+    ring = false;
+    this.fill = color(255);
+  }
+  
+  void ring() {
+    if(!ring) {
+      int index = globe.getChildIndex(globe.getChild("RING"));
+      if(index != -1) {
+        globe.removeChild(index);
+      }
+    } else if(ring) {
+      PShape ring = createShape();
+      ring.beginShape();
+      strokeWeight(radius/4);
+      stroke(255);
+      noFill();
+      rotateZ(200);
+      rotateY(180);
+      rotateX(150);
+      ellipse(0, 0, radius*2.5, radius*2.5);
+      ring.endShape();
+      globe.addName("RING", ring);
+    }
   }
   
   void orbit() {
@@ -91,7 +118,6 @@ class Planet {
   void show() {
     pushMatrix();
     noStroke();
-    fill(255);
     
     PVector v2 = new PVector(1, 0, 1);
     PVector perp = v.cross(v2);
@@ -99,13 +125,9 @@ class Planet {
     rotate(angle, perp.x, perp.y, perp.z);
     translate(v.x, v.y, v.z);
     
-    if(highlight) {
-      globe.getChild(0).setFill(#D6E50E);
-      highlight = false;
-    } else {
-      globe.getChild(0).setFill(color(255));
-    }
-    
+    globe.getChild(0).setFill(fill);
+    highlight();
+    ring();
     shape(globe);
     
     if (planets != null) {
@@ -117,5 +139,34 @@ class Planet {
     popMatrix();
   }
   
-
+  void setColour(color fill) {
+    this.fill = fill;
+  }
+  
+  void nextColour() {
+    if(curColour == colours.length) {
+      curColour = 0;
+    }
+    this.fill = colours[curColour++];
+  }
+  
+  void highlight() {
+    if(highlight) {
+      PShape highlight = createShape();
+      highlight.beginShape();
+      stroke(#D6E50E);
+      strokeWeight(10); 
+      noFill();
+      ellipse(0, 0, radius*2, radius*2);
+      highlight.endShape();
+      globe.addName("HL", highlight);
+      this.highlight = false;
+    } else {
+      int index = globe.getChildIndex(globe.getChild("HL"));
+      if(index != -1) {
+        globe.removeChild(index);
+      }
+    }
+  }
+  
 }

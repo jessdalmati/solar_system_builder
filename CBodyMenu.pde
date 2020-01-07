@@ -1,22 +1,27 @@
 class CBodyMenu extends Menu {
+  String[] buttonNames = {"moon", "-moon", "ring", "colour", "+size", "-size", 
+    "+dist", "-dist", "+speed", "-speed"};
   int planet;
-  
-  CBodyMenu() {
+
+  CBodyMenu(Planet sun) {
+    this.sun = sun;
+    this.buttons = new Button[buttonNames.length];
+    
+    for(int i = 0; i < buttons.length; i++) {
+      buttons[i] = new Button(buttonNames[i], -width/2 + 20, -height/2 + i*60 + 20, 80, 40);
+    }
+    
+    this.show = false;
   }
   
-  CBodyMenu(String[] buttonNames) {
-    super(buttonNames);
-  }
-  
-  void drawMenu(Planet sun) {
+  void drawMenu() {
     if(show) {
-      if(sun.planets != null) {
-        sun.planets[planet].highlight = true;
-      }
+      sun.planets[planet].highlight = true;
       drawBackground();
       for(int i = 0; i < buttons.length; i++) {
          buttons[i].drawButton();
       }
+      buttons[2].highlight = sun.planets[planet].ring;
       highlight();
     }
   }

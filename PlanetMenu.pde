@@ -1,10 +1,11 @@
 class PlanetMenu extends Menu {
   
-  PlanetMenu() {
-
+  PlanetMenu(Sun sun) {
+    this.sun = sun;
+    this.show = false;
   }
   
-  void drawMenu(Planet sun) {
+  void drawMenu() {
     if(show) {
       drawBackground();
       if(sun.planets != null) {
@@ -12,12 +13,12 @@ class PlanetMenu extends Menu {
         for(int i = 0; i < buttons.length; i++) {
            buttons[i].drawButton();
         }
-        highlight(sun);
+        highlight();
       }
     }
   }
   
-  void highlight(Planet sun) {
+  void highlight() {
     if(mouseOver()) {
       for(int i = 0; i < buttons.length; i++) {
         if(buttons[i].mouseOver()) {

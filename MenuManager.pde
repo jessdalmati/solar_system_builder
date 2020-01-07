@@ -1,0 +1,4 @@
+class MenuManager {
+  MenuManager() {
+  }
+}

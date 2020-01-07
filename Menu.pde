@@ -1,16 +1,17 @@
 class Menu {
   Button[] buttons;
-  String[] buttonNames;
+  String[] buttonNames = {"+", "-", "planets", "colour", "ring"};
   Boolean show;
-  
+  Planet sun;
+
   Menu() {
-    this.buttonNames = new String[0];
-    this.buttons = new Button[0];
+    this.sun = new Planet(0, 0, 0);
     this.show = false;
+    this.buttons = new Button[0];
   }
   
-  Menu(String[] buttonNames) {
-    this.buttonNames = buttonNames;
+  Menu(Planet sun) {
+    this.sun = sun;
     this.buttons = new Button[buttonNames.length];
     
     for(int i = 0; i < buttons.length; i++) {
@@ -41,6 +42,7 @@ class Menu {
       for(int i = 0; i < buttons.length; i++) {
          buttons[i].drawButton();
       }
+      buttons[4].highlight = sun.ring;
       highlight();
     }
   }
@@ -73,6 +75,10 @@ class Menu {
       }
     }
     return -1;
+  }
+  
+  void selectButton(int selected) {
+    buttons[selected].highlight = !buttons[selected].highlight;
   }
   
 }

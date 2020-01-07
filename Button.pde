@@ -4,6 +4,8 @@ class Button {
   int w;
   int h;
   String text;
+  
+  Boolean highlight;
 
   Button(String text, int x, int y, int w, int h) {
     this.x = x;
@@ -11,6 +13,7 @@ class Button {
     this.w = w;
     this.h = h;
     this.text = text;
+    this.highlight = false;
   }
   
   void drawButton() {
@@ -21,6 +24,9 @@ class Button {
     textSize(18);
     textAlign(CENTER, CENTER);
     text(text, x + w/2, y + h/2);
+    if(highlight) {
+      highlight();
+    }
   }
   
   Boolean mouseOver() {
