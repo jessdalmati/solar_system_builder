@@ -5,24 +5,20 @@ class Planet {
   Planet[] planets;
   float orbitSpeed;
   PVector v;
-  
-  float x;
-  float y;
-  float z;
-  
+
   PShape globe;
   
   Boolean highlight;
   Boolean ring;
   color fill;
-  color[] colours = {color(#9CEDB3), color(#ED9CE9), color(#EAED9C), color(255)};
+  
+  color[] colours = {color(#ED9CE9), color(#EAED9C), color(#C4B7FF), color(#C9FFE7), 
+    color(#FA6F71), color(#FABE6F), color(#6FFAF2), color(255)};
   int curColour = 0;
   
   Planet(float r, float d, float s) {
     v = PVector.random3D();
-    x = v.x;
-    y = v.y;
-    z = v.z;
+
     radius = r;
     dist = d;
     v.mult(dist);

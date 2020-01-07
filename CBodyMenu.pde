@@ -1,6 +1,5 @@
 class CBodyMenu extends Menu {
-  String[] buttonNames = {"moon", "-moon", "ring", "colour", "+size", "-size", 
-    "+dist", "-dist", "+speed", "-speed"};
+  String[] buttonNames = {"+", "-", "ring", "colour", "<--"}; //, "size", "dist", "speed"};
   int planet;
 
   CBodyMenu(Planet sun) {

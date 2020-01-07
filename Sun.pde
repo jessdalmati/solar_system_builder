@@ -1,13 +1,17 @@
 class Sun extends Planet {
   
   Boolean selected;
+  //PImage sunTexture;
   
   Sun(int r) {
     super(r, 0, 0.001);
     angle = radians(45);
     selected = false;
+    //sunTexture = loadImage("sun.jpg");
+    //globe.getChild(0).setTexture(sunTexture);
   }
   
+  @Override
   void show() {
     pushMatrix();
     noStroke();
@@ -17,9 +21,8 @@ class Sun extends Planet {
     
     rotateY(angle);
     translate(v.x, v.y, v.z);
-    
+
     globe.getChild(0).setFill(fill);
-    
     
     ring();
     shape(globe);
@@ -34,6 +37,7 @@ class Sun extends Planet {
     highlight();
   }
   
+  @Override
   void highlight() {
     if(mouseOver() || selected) {
       pushMatrix();

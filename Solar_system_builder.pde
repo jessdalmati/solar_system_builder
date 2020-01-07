@@ -11,7 +11,7 @@ void settings() {
 }
 
 void setup() {
-  sun = new Sun(50);
+  sun = new Sun(60);
   mainMenu = new Menu(sun);
   planetMenu = new PlanetMenu(sun);
   cBodyMenu = new CBodyMenu(sun);
@@ -64,11 +64,20 @@ void clickOnPlanetMenu() {
 void clickOnCBodyMenu() {
   int selected = cBodyMenu.selected();
   switch(selected) {
+    case 0:
+      sun.planets[cBodyMenu.planet].spawnMoon();
+      break;
+    case 1:
+      sun.planets[cBodyMenu.planet].removeMoon();
     case 2: 
       sun.planets[cBodyMenu.planet].ring = !sun.planets[cBodyMenu.planet].ring;
       break;
     case 3: 
       sun.planets[cBodyMenu.planet].nextColour();
+      break;
+    case 4:
+      cBodyMenu.show = false;
+      planetMenu.show = true;
   }
 }
 
@@ -91,6 +100,7 @@ void clickOnMainMenu() {
         break;
       case 4: 
         sun.ring = !sun.ring;
+        break;
   }
 }
 
