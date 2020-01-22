@@ -19,7 +19,7 @@ class Sun extends Planet {
     if(planets == null) {
       planets = new Planet[1];
       planets[0] = new Planet(r, d, s);
-    } else if(planets.length < 10) {
+    } else if(planets.length < 9) {
       Planet[] temp = planets;
       planets = new Planet[temp.length + 1];
       for(int i = 0; i < temp.length; i++) {

@@ -1,5 +1,5 @@
 Sun sun;
-PeasyCam cam;
+//PeasyCam cam;
 Menu mainMenu;
 PlanetMenu planetMenu;
 CBodyMenu cBodyMenu;
@@ -15,6 +15,7 @@ void setup() {
   mainMenu = new Menu(sun);
   planetMenu = new PlanetMenu(sun);
   cBodyMenu = new CBodyMenu(sun);
+  //cam = new PeasyCam(this, 500);
 }
 
 void draw() {
@@ -54,9 +55,14 @@ void mousePressed() {
 void clickOnPlanetMenu() {
   int selected = planetMenu.selected();
   if(selected != -1) {
-    planetMenu.show = false;
-    cBodyMenu.planet = selected;
-    cBodyMenu.show = true; 
+    if(selected == planetMenu.buttons.length - 1) {
+      planetMenu.show = false;
+      mainMenu.show = true;
+    } else {
+      planetMenu.show = false;
+      cBodyMenu.planet = selected;
+      cBodyMenu.show = true; 
+    }
   }
 }
 
