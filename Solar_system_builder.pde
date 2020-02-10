@@ -1,8 +1,8 @@
 Sun sun;
-//PeasyCam cam;
 Menu mainMenu;
 PlanetMenu planetMenu;
 CBodyMenu cBodyMenu;
+Boolean pause;
 
 Starfield sf = new Starfield();
 
@@ -15,7 +15,7 @@ void setup() {
   mainMenu = new Menu(sun);
   planetMenu = new PlanetMenu(sun);
   cBodyMenu = new CBodyMenu(sun);
-  //cam = new PeasyCam(this, 500);
+  pause = false;
 }
 
 void draw() {
@@ -26,7 +26,9 @@ void draw() {
   sf.drawStars();
 
   sun.show();
-  sun.orbit();
+  if(!pause) {
+    sun.orbit();
+  }
 
   mainMenu.drawMenu();
   
@@ -46,10 +48,23 @@ void mousePressed() {
     clickOnPlanetMenu();
   } else if(cBodyMenu.mouseOver()) {
     clickOnCBodyMenu();
+  } else if(mouseOverPlay()) {
+    clickOnPlay();
   } else {
     closeMenu();
   }
  
+}
+
+Boolean mouseOverPlay() {
+  if(mouseX > 590 && mouseY > 590) {
+    return true;
+  }
+  return false;
+}
+
+void clickOnPlay() {
+  pause = !pause;
 }
 
 void clickOnPlanetMenu() {
